@@ -1,0 +1,36 @@
+﻿<Window x:Class="location.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:location"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        
+        <Menu HorizontalAlignment="Left" Height="33" Margin="40,0,0,0" VerticalAlignment="Top" Width="718" FontWeight="Bold" FontSize="16">
+            <MenuItem Header="Accueil">
+                <MenuItem Header="Plus d'informations"/>
+                <MenuItem Header="Quitter" Click="MenuItem_Click"/>
+            </MenuItem>
+            <MenuItem Header="Location" Click="MenuItem_Click_3">
+               
+            </MenuItem>
+            <MenuItem Header="Client">
+                <MenuItem Header="Ajout client" Click="MenuItem_Click_1"/>
+                <MenuItem Header="Liste des clients" Click="MenuItem_Click_2"/>
+                
+            </MenuItem>
+            <MenuItem Header="Aide"/>
+        </Menu>
+        <Grid Name="MainContent" Margin="24,28,9.6,0">
+            <Grid.Background>
+                <ImageBrush Stretch="Fill" ImageSource="img/location.jpg" AlignmentY="Top" AlignmentX="Center"/>
+
+            </Grid.Background>
+            <TextBlock HorizontalAlignment="Left" Margin="487,81,0,0" TextWrapping="Wrap" Text="Bienvenue dans votre agence de location !" VerticalAlignment="Top" Height="85" Width="230" Foreground="#FFCB2828" FontWeight="Bold" FontSize="20"/>
+        </Grid>
+        <ContentControl Name="Main" Margin="24,33,9.6,10"></ContentControl>
+
+    </Grid>
+</Window>

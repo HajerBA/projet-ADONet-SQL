@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LocationModelStoreContainer" CdmEntityContainer="LocationEntities">
+    <EntitySetMapping Name="Categorie">
+      <EntityTypeMapping TypeName="LocationModel.Categorie">
+        <MappingFragment StoreEntitySet="Categorie">
+          <ScalarProperty Name="ID_Categ" ColumnName="ID_Categ" />
+          <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+          <ScalarProperty Name="Prix_KM" ColumnName="Prix_KM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="LocationModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+          <ScalarProperty Name="Date_Naissance" ColumnName="Date_Naissance" />
+          <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+          <ScalarProperty Name="Code_Postale" ColumnName="Code_Postale" />
+          <ScalarProperty Name="Ville" ColumnName="Ville" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Loue">
+      <EntityTypeMapping TypeName="LocationModel.Loue">
+        <MappingFragment StoreEntitySet="Loue">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_V" ColumnName="ID_V" />
+          <ScalarProperty Name="NB_KM" ColumnName="NB_KM" />
+          <ScalarProperty Name="Date_debut" ColumnName="Date_debut" />
+          <ScalarProperty Name="Date_fin" ColumnName="Date_fin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marque">
+      <EntityTypeMapping TypeName="LocationModel.Marque">
+        <MappingFragment StoreEntitySet="Marque">
+          <ScalarProperty Name="ID_marq" ColumnName="ID_marq" />
+          <ScalarProperty Name="Nom_marq" ColumnName="Nom_marq" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vehicule">
+      <EntityTypeMapping TypeName="LocationModel.Vehicule">
+        <MappingFragment StoreEntitySet="Vehicule">
+          <ScalarProperty Name="ID_V" ColumnName="ID_V" />
+          <ScalarProperty Name="IMMATRICULATION" ColumnName="IMMATRICULATION" />
+          <ScalarProperty Name="Couleur" ColumnName="Couleur" />
+          <ScalarProperty Name="Date_mise_en_service" ColumnName="Date_mise_en_service" />
+          <ScalarProperty Name="ID_Categ" ColumnName="ID_Categ" />
+          <ScalarProperty Name="ID_marq" ColumnName="ID_marq" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LocationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Categorie">
+    <Key>
+      <PropertyRef Name="ID_Categ" />
+    </Key>
+    <Property Name="ID_Categ" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Prix_KM" Type="Double" />
+    <NavigationProperty Name="Vehicule" Relationship="Self.FK_Vehicule_Categorie" FromRole="Categorie" ToRole="Vehicule" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date_Naissance" Type="DateTime" Precision="0" />
+    <Property Name="Adresse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Code_Postale" Type="Int32" />
+    <Property Name="Ville" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Loue" Relationship="Self.FK_Loue_Client" FromRole="Client" ToRole="Loue" />
+  </EntityType>
+  <EntityType Name="Loue">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_V" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ID_V" Type="Int32" Nullable="false" />
+    <Property Name="NB_KM" Type="Int32" Nullable="false" />
+    <Property Name="Date_debut" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Date_fin" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Loue_Client" FromRole="Loue" ToRole="Client" />
+    <NavigationProperty Name="Vehicule" Relationship="Self.FK__Vehicule" FromRole="Loue" ToRole="Vehicule" />
+  </EntityType>
+  <EntityType Name="Marque">
+    <Key>
+      <PropertyRef Name="ID_marq" />
+    </Key>
+    <Property Name="ID_marq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom_marq" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Vehicule" Relationship="Self.FK_Vehicule_Marque" FromRole="Marque" ToRole="Vehicule" />
+  </EntityType>
+  <EntityType Name="Vehicule">
+    <Key>
+      <PropertyRef Name="ID_V" />
+    </Key>
+    <Property Name="ID_V" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IMMATRICULATION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Couleur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date_mise_en_service" Type="DateTime" Precision="0" />
+    <Property Name="ID_Categ" Type="Int32" Nullable="false" />
+    <Property Name="ID_marq" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Categorie" Relationship="Self.FK_Vehicule_Categorie" FromRole="Vehicule" ToRole="Categorie" />
+    <NavigationProperty Name="Loue" Relationship="Self.FK__Vehicule" FromRole="Vehicule" ToRole="Loue" />
+    <NavigationProperty Name="Marque" Relationship="Self.FK_Vehicule_Marque" FromRole="Vehicule" ToRole="Marque" />
+  </EntityType>
+  <Association Name="FK_Vehicule_Categorie">
+    <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+    <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorie">
+        <PropertyRef Name="ID_Categ" />
+      </Principal>
+      <Dependent Role="Vehicule">
+        <PropertyRef Name="ID_Categ" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Loue_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Loue" Type="Self.Loue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Loue">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vehicule">
+    <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="1" />
+    <End Role="Loue" Type="Self.Loue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicule">
+        <PropertyRef Name="ID_V" />
+      </Principal>
+      <Dependent Role="Loue">
+        <PropertyRef Name="ID_V" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vehicule_Marque">
+    <End Role="Marque" Type="Self.Marque" Multiplicity="1" />
+    <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marque">
+        <PropertyRef Name="ID_marq" />
+      </Principal>
+      <Dependent Role="Vehicule">
+        <PropertyRef Name="ID_marq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LocationEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categorie" EntityType="Self.Categorie" />
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="Loue" EntityType="Self.Loue" />
+    <EntitySet Name="Marque" EntityType="Self.Marque" />
+    <EntitySet Name="Vehicule" EntityType="Self.Vehicule" />
+    <AssociationSet Name="FK_Vehicule_Categorie" Association="Self.FK_Vehicule_Categorie">
+      <End Role="Categorie" EntitySet="Categorie" />
+      <End Role="Vehicule" EntitySet="Vehicule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Loue_Client" Association="Self.FK_Loue_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Loue" EntitySet="Loue" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vehicule" Association="Self.FK__Vehicule">
+      <End Role="Vehicule" EntitySet="Vehicule" />
+      <End Role="Loue" EntitySet="Loue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vehicule_Marque" Association="Self.FK_Vehicule_Marque">
+      <End Role="Marque" EntitySet="Marque" />
+      <End Role="Vehicule" EntitySet="Vehicule" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="location.Location"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:location"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <TabControl HorizontalAlignment="Left" Height="166" Margin="64,143,0,0" VerticalAlignment="Top" Width="609">
+            <TabItem Header="Créer une location">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Liste des locations">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="151*"/>
+                        <ColumnDefinition Width="48*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+            <TabItem Content="" Header="Mettre à jour une location"/>
+        </TabControl>
+        <Label Content="Gestion des locations" HorizontalAlignment="Left" Margin="202,83,0,0" VerticalAlignment="Top" Height="24" Width="254"/>
+
+    </Grid>
+</UserControl>

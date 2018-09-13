@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LocationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Categorie">
+    <Key>
+      <PropertyRef Name="ID_Categ" />
+    </Key>
+    <Property Name="ID_Categ" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Libelle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Prix_KM" Type="float" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Prenom" Type="nvarchar" MaxLength="50" />
+    <Property Name="Date_Naissance" Type="date" />
+    <Property Name="Adresse" Type="nvarchar" MaxLength="50" />
+    <Property Name="Code_Postale" Type="int" />
+    <Property Name="Ville" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Loue">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_V" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ID_V" Type="int" Nullable="false" />
+    <Property Name="NB_KM" Type="int" Nullable="false" />
+    <Property Name="Date_debut" Type="date" Nullable="false" />
+    <Property Name="Date_fin" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Marque">
+    <Key>
+      <PropertyRef Name="ID_marq" />
+    </Key>
+    <Property Name="ID_marq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom_marq" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Vehicule">
+    <Key>
+      <PropertyRef Name="ID_V" />
+    </Key>
+    <Property Name="ID_V" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IMMATRICULATION" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Couleur" Type="nvarchar" MaxLength="50" />
+    <Property Name="Date_mise_en_service" Type="date" />
+    <Property Name="ID_Categ" Type="int" Nullable="false" />
+    <Property Name="ID_marq" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Vehicule">
+    <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="1" />
+    <End Role="Loue" Type="Self.Loue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicule">
+        <PropertyRef Name="ID_V" />
+      </Principal>
+      <Dependent Role="Loue">
+        <PropertyRef Name="ID_V" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Loue_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Loue" Type="Self.Loue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Loue">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vehicule_Categorie">
+    <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+    <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorie">
+        <PropertyRef Name="ID_Categ" />
+      </Principal>
+      <Dependent Role="Vehicule">
+        <PropertyRef Name="ID_Categ" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vehicule_Marque">
+    <End Role="Marque" Type="Self.Marque" Multiplicity="1" />
+    <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marque">
+        <PropertyRef Name="ID_marq" />
+      </Principal>
+      <Dependent Role="Vehicule">
+        <PropertyRef Name="ID_marq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LocationModelStoreContainer">
+    <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Loue" EntityType="Self.Loue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Marque" EntityType="Self.Marque" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vehicule" EntityType="Self.Vehicule" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Vehicule" Association="Self.FK__Vehicule">
+      <End Role="Vehicule" EntitySet="Vehicule" />
+      <End Role="Loue" EntitySet="Loue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Loue_Client" Association="Self.FK_Loue_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Loue" EntitySet="Loue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vehicule_Categorie" Association="Self.FK_Vehicule_Categorie">
+      <End Role="Categorie" EntitySet="Categorie" />
+      <End Role="Vehicule" EntitySet="Vehicule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vehicule_Marque" Association="Self.FK_Vehicule_Marque">
+      <End Role="Marque" EntitySet="Marque" />
+      <End Role="Vehicule" EntitySet="Vehicule" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
